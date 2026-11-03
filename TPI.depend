@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1793737526 source:/home/raidenovik/Universidad/Analisis de datos/TPI/parcial2/main.cpp
+	<iostream>
+	<locale.h>
+	<iomanip>
+	"funciones.h"
+
+1793736834 source:/home/raidenovik/Universidad/Analisis de datos/TPI/parcial2/funciones.cpp
+	"funciones.h"
+
+1793736809 /home/raidenovik/Universidad/Analisis de datos/TPI/parcial2/funciones.h
+

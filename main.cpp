@@ -23,13 +23,10 @@ int main(){
         }
     }
 
-    func.CalcularTNAPromedio(tasas, promediosBancos);
-
+    calcularTNAPromedio(tasas, promediosBancos);
     cout << fixed << setprecision(3);
-
-
-    for(int i = 0; i < 3; i++){
-        cout << "El TNA promedio del banco " << bancos[i] << "es: " << promediosBancos[i] << endl;
+    for (int i = 0; i < 3; i++) {
+        cout << "El TNA promedio del banco " << bancos[i] << " es: " << promediosBancos[i] << "%" << endl;
     }
 
 	return 0;

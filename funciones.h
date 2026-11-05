@@ -1,13 +1,25 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
 
-class Funciones{
+void calcularTNAPromedio(double tasas[3][3], double promedios[3]) {
+    for (int i = 0; i < 3; i++) {
+        double suma = 0.0;
+        for (int j = 0; j < 3; j++) {
+            suma += tasas[i][j];
+        }
+        promedios[i] = suma / 3.0;
+    }
+}
 
-public:
+double calcularGanancia(double capital, double tasaAnual, int periodos) {
+    double tasaPeriodica = (tasaAnual / 100.0) / periodos;
+    double capitalAcumulado = capital;
 
-    void CalcularTNAPromedio(double TNA[3][3], double promediosBancos[3]);
+    for (int i = 0; i < periodos; i++) {
+        capitalAcumulado += capitalAcumulado * tasaPeriodica;
+    }
 
-
-};
+    return capitalAcumulado - capital;
+}
 
 #endif // FUNCIONES_H_INCLUDED

@@ -29,7 +29,21 @@ int main(){
 
 
     for(int i = 0; i < 3; i++){
-        cout << "El TNA promedio del banco " << bancos[i] << "es: " << promediosBancos[i] << endl;
+        cout << "El TNA promedio del banco " << bancos[i] << " es: " << promediosBancos[i] << endl;
+    }
+
+    double montosTNAPromedio[3];
+    double montosTrimestrales[3];
+
+    func.CalcularInversionTNAPromedio(capital, promediosBancos, montosTNAPromedio);
+    func.CalcularInversionTrimestral(capital, tasas, montosTrimestrales);
+
+    for(int i = 0; i < 3; i++){
+        cout << "Inversion con TNA promedio en " << bancos[i] << ": " << montosTNAPromedio[i] << endl;
+    }
+
+    for(int i = 0; i < 3; i++){
+        cout << "Inversion trimestral en " << bancos[i] << ": " << montosTrimestrales[i] << endl;
     }
 
 	return 0;

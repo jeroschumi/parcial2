@@ -7,6 +7,9 @@ public:
 
     void CalcularTNAPromedio(double TNA[3][3], double promediosBancos[3]);
 
+    void CalcularInversionTNAPromedio(double capital, double promediosBancos[3], double montosFinales[3]);
+
+    void CalcularInversionTrimestral(double capital, double TNA[3][3], double montosFinales[3]);
 
 };
 

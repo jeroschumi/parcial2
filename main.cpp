@@ -1,15 +1,17 @@
 #include <iostream>
 #include <locale.h>
 #include <iomanip>
+
 #include "funciones.h"
+
 using namespace std;
 
 int main(){
     setlocale(LC_ALL, "spanish");
-    Funciones func;
-    double capital;
-    double promediosBancos[3];
 
+
+    // Punto 1: Ingreso de datos (capital y tasas)
+    double capital;
     cout<<"Ingrese el monto del capital a invertir: ";
     cin>>capital;
 
@@ -23,27 +25,42 @@ int main(){
         }
     }
 
+
+    // Punto 2: Cálculo y visualización del TNA Promedio
+    double promediosBancos[3];
     calcularTNAPromedio(tasas, promediosBancos);
     cout << fixed << setprecision(3);
-
 
     for(int i = 0; i < 3; i++){
         cout << "El TNA promedio del banco " << bancos[i] << " es: " << promediosBancos[i] << endl;
     }
 
-    double montosTNAPromedio[3];
-    double montosTrimestrales[3];
 
-    func.CalcularInversionTNAPromedio(capital, promediosBancos, montosTNAPromedio);
-    func.CalcularInversionTrimestral(capital, tasas, montosTrimestrales);
+    // Punto 3: Cálculo y visualización de Inversión con TNA Promedio (Anual)
+    double montosTNAPromedio[3];
+    calcularInversionTNAPromedio(capital, promediosBancos, montosTNAPromedio);
 
     for(int i = 0; i < 3; i++){
         cout << "Inversion con TNA promedio en " << bancos[i] << ": " << montosTNAPromedio[i] << endl;
     }
 
+
+    // Punto 4: Cálculo y visualización de Inversión Trimestral
+    double montosTrimestrales[3];
+    calcularInversionTrimestral(capital, tasas, montosTrimestrales);
+
     for(int i = 0; i < 3; i++){
         cout << "Inversion trimestral en " << bancos[i] << ": " << montosTrimestrales[i] << endl;
     }
 
-	return 0;
+
+    // Punto 5: Cálculo y visualización de Inversión Mensual
+    double montosMensuales[3];
+    calcularInversionMensual(capital, tasas, montosMensuales);
+
+    for(int i=0; i<3; i++){
+        cout<<"Inversión mensual en "<<bancos[i]<<": "<<montosMensuales[i]<<endl;
+    }
+
+    return 0;
 }

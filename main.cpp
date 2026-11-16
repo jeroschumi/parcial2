@@ -23,8 +23,7 @@ int main(){
         }
     }
 
-    func.CalcularTNAPromedio(tasas, promediosBancos);
-
+    calcularTNAPromedio(tasas, promediosBancos);
     cout << fixed << setprecision(3);
 
 

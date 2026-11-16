@@ -18,8 +18,13 @@ double calcularGanancia(double capital, double tasaAnual, int periodos) {
     for (int i = 0; i < periodos; i++) {
         capitalAcumulado += capitalAcumulado * tasaPeriodica;
     }
-
     return capitalAcumulado - capital;
 }
+    void CalcularInversionTNAPromedio(double capital, double promediosBancos[3], double montosFinales[3]);
+
+    void CalcularInversionTrimestral(double capital, double TNA[3][3], double montosFinales[3]);
+
+};
+main
 
 #endif // FUNCIONES_H_INCLUDED

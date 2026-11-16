@@ -1,59 +1,56 @@
 #include "funciones.h"
 
-// Calcula el promedio de las 3 tasas anuales de cada banco
-// TNA[i][j] = tasa del banco i en el año j
-// El resultado se guarda en promediosBancos (una posición por banco)
-void Funciones::CalcularTNAPromedio(double TNA[3][3], double promediosBancos[3]){
 
-    // Recorremos los 3 bancos
-    for(int i = 0; i < 3; i++){
-        double suma = 0; // empieza en 0 para cada banco
+//Calcula el promedio de la TNA para cada banco
+void Funciones::CalcularTNAPromedio(double tasasHistoricas[3][3], double promediosTNA[3]) {
+    for (int b=0; b<3; b++) {
+        double sumaTasas = 0.0; //Acumulador de tasas (se reinicia por banco)
 
-        // Sumamos las tasas de los 3 años de ese banco
-        for(int j = 0; j < 3; j++){
-            suma = suma + TNA[i][j];
+        //Recorre los tres años de cada banco
+        for (int a=0; a<3; a++) {
+            sumaTasas += tasasHistoricas[b][a]; //Suma la tasa del año actual
         }
 
-        // El promedio es la suma dividida la cantidad de años
-        promediosBancos[i] = suma / 3;
+        promediosTNA[b] = sumaTasas / 3.0; //Calcula y guarda el promedio del banco
     }
 }
 
-// Calcula cuánta plata se tiene después de invertir el capital 3 años
-// usando la tasa promedio de cada banco.
-// Lo ganado NO se reinvierte: se gana lo mismo todos los años.
+
+//Calcula el monto final con la TNA promedio (anual)
 void Funciones::CalcularInversionTNAPromedio(double capital, double promediosBancos[3], double montosFinales[3]){
-
-    // Recorremos los 3 bancos
     for(int i = 0; i < 3; i++){
-        // Lo que se gana en 1 año (la tasa está en %, por eso se divide por 100)
-        double ganancia = capital * promediosBancos[i] / 100;
-
-        // Monto final = capital inicial + lo ganado en los 3 años
-        montosFinales[i] = capital + ganancia * 3;
+        double ganancia = capital * promediosBancos[i] / 100; //Ganancia por año
+        montosFinales[i] = capital + ganancia * 3; //Monto final (caital inicial + ganancia de 1 año)
     }
 }
 
-// Calcula cuánta plata se tiene después de invertir el capital 3 años
-// en plazos trimestrales (4 por año), reinvirtiendo lo ganado.
-// Cada trimestre se usa la tasa del año dividida 4.
+
+//Calcula la inversión en plazos trimestrales acumulando y reinvirtiendo ganancias
 void Funciones::CalcularInversionTrimestral(double capital, double TNA[3][3], double montosFinales[3]){
-
-    // Recorremos los 3 bancos
     for(int i = 0; i < 3; i++){
-        double monto = capital; // cada banco arranca con el capital inicial
+        double monto = capital;
 
-        // Recorremos los 3 años
         for(int j = 0; j < 3; j++){
-            // Recorremos los 4 trimestres del año
             for(int t = 0; t < 4; t++){
-                // Se suma lo ganado en el trimestre al monto,
-                // así el trimestre siguiente se invierte todo junto
+                //Suma interés generado del trimestre
                 monto = monto + monto * TNA[i][j] / 100 / 4;
             }
         }
 
-        // Después de los 12 trimestres, guardamos el monto final del banco
-        montosFinales[i] = monto;
+        montosFinales[i] = monto; //Guarda el monto final de los 12 trimestre
     }
+}
+
+
+//Calcula la ganancia neta reinvirtiendo el capital período a período
+double Funciones::CalcularGanancia(double capitalInicial, double tasaAnual, int periodosEnElAnio) {
+    double tasaDelPeriodo = (tasaAnual / 100.0) / periodosEnElAnio; //Calcula la tasa proporcional
+    double capitalAcumulado = capitalInicial; //Inicia con el capital inicial
+
+    //Reinvierte el capital en cada período del año
+    for (int periodo = 0; periodo < periodosEnElAnio; periodo++) {
+        capitalAcumulado += capitalAcumulado * tasaDelPeriodo; //Suma el interés del preíodo
+    }
+
+    return capitalAcumulado - capitalInicial; //Retorna solo la ganancia neta
 }
